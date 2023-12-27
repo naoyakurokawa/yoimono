@@ -1,0 +1,277 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ *,
+ ::before,
+ ::after {
+   box-sizing: border-box; /* 1 */
+   background-repeat: no-repeat; /* 2 */
+ }
+
+html,body {
+	margin: 0;padding: 0;
+	font-size: 13px;	/*基準となるフォントサイズ。下の方にある「画面幅900px以上」で基準を大きなサイズに再設定しています。*/
+}
+
+body {
+	font-family: "ヒラギノ丸ゴ Pro", "Hiragino Maru Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;	/*フォント種類*/
+	-webkit-text-size-adjust: none;
+	background: #fff;	/*背景色*/
+	color: #666;		/*全体の文字色*/
+	line-height: 2;		/*行間*/
+	overflow-x: hidden;
+}
+
+/*リセット*/
+h3 {
+	margin: 0;
+}
+
+figure {
+    margin: 0;
+    text-align: center;
+}
+
+dd {
+    margin: 0;
+}
+
+nav {
+    margin: 0;
+    padding: 0;
+}
+
+/*table全般の設定*/
+table {
+	border-collapse:collapse;
+}
+
+/*画像全般の設定*/
+img {
+    border: none;
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
+/*ul,olタグ*/
+ul, ol {margin-bottom: 30px;}
+
+/*他*/
+section + section {
+	margin-top: 50px;
+}
+
+
+/*リンクテキスト全般の設定
+---------------------------------------------------------------------------*/
+a {
+	color: #666;	/*文字色*/
+	transition: 0.3s;
+}
+
+a:hover {
+	opacity: 0.7;	/*マウスオン時に70%の透明度にする*/
+}
+
+/*headerブロック
+---------------------------------------------------------------------------*/
+header {
+	background: #333;	/*背景色*/
+	color: #fff;		/*文字色*/
+	display: flex;		/*flexボックスを使う指定*/
+	justify-content: space-between;	/*並びかたの種類の指定*/
+	padding: 10px 20px;	/*上下、左右へのヘッダー内の余白*/
+}
+
+/*ヘッダー内のリンクテキスト*/
+header a {
+	color: #fff;	/*文字色*/
+	text-decoration: none;	/*デフォルトで入る下線を非表示にする*/
+}
+
+/*ロゴ画像*/
+header #logo {
+	margin: 0;line-height: 0;
+  line-height: 30px;
+}
+
+/*ヘッダー内のメニュー*/
+header ul {
+	margin: 0; padding: 0;
+	list-style: none;
+	display: flex;	/*横並びにする*/
+}
+header ul a {
+	margin-left: 2em;	/*メニュー同士に空ける余白*/
+}
+
+/*メニュー初期設定
+---------------------------------------------------------------------------*/
+#menubar ul {list-style: none;margin: 0;padding: 0;}
+#menubar {display: none;}
+#menubar.db {display: block;}
+#menubar.dn {display: none;}
+
+
+/*小さな端末用の設定（開閉ブロック）
+---------------------------------------------------------------------------*/
+/*メニューブロック設定*/
+.s #menubar.db {
+	position: fixed;overflow: auto;z-index: 100;
+	left: 0px;top: 0px;
+	width: 100%;
+	height: 100%;
+	padding: 70px 0;	/*上下、左右へのブロック内の余白*/
+	background: rgba(0,0,0,0.9);		/*背景色。0,0,0は黒の事で0.9は色が90%出た状態の事。*/
+	animation: animation1 0.2s both;	/*animation.cssの、animation1を実行する。0.2sは0.2秒の事。*/
+	text-align: center;	/*内容をセンタリング*/
+	color: #fff;		/*文字色*/
+}
+.s #menubar.db a {
+	display: block;
+	color: #fff;	/*リンクテキストの文字色*/
+}
+
+
+/*３本バー（ハンバーガー）アイコン設定
+---------------------------------------------------------------------------*/
+/*開閉用のスタイル*/
+#menubar_hdr.db {display: flex;}
+#menubar_hdr.dn {display: none;}
+
+/*３本バーを囲むブロック*/
+#menubar_hdr {
+	position: fixed;z-index: 101;
+	cursor: pointer;
+	right: 5px;			/*左からの配置場所指定*/
+	top: 2px;			/*上からの配置場所指定*/
+	padding: 16px 14px;	/*上下、左右への余白*/
+	width: 46px;		/*幅（３本バーが出ている場合の幅になります）*/
+	height: 46px;		/*高さ*/
+	display: flex;					/*flexボックスを使う指定*/
+	flex-direction: column;			/*子要素（３本バー）を縦並びにする*/
+	justify-content: space-between;	/*並びかたの種類の指定*/
+}
+
+/*バー１本あたりの設定*/
+#menubar_hdr span {
+	display: block;
+	transition: 0.3s;	/*アニメーションにかける時間。0.3秒。*/
+	border-top: 2px solid #fff;	/*線の幅、線種、色*/
+}
+
+/*×印が出ている状態の設定。※１本目および２本目のバーの共通設定。*/
+#menubar_hdr.ham span:nth-of-type(1),
+#menubar_hdr.ham span:nth-of-type(3) {
+	transform-origin: center center;	/*変形の起点。センターに。*/
+	width: 20px;						/*バーの幅*/
+}
+
+/*×印が出ている状態の設定。※１本目のバー。*/
+#menubar_hdr.ham span:nth-of-type(1){
+	transform: rotate(45deg) translate(3.8px, 5px);	/*回転45°と、X軸Y軸への移動距離の指定*/
+}
+
+/*×印が出ている状態の設定。※３本目のバー。*/
+#menubar_hdr.ham span:nth-of-type(3){
+	transform: rotate(-45deg) translate(3.8px, -5px);	/*回転-45°と、X軸Y軸への移動距離の指定*/
+}
+
+/*×印が出ている状態の設定。※２本目のバー。*/
+#menubar_hdr.ham span:nth-of-type(2){
+	display: none;	/*２本目は使わないので非表示にする*/
+}
+
+@media screen and (max-width:900px) {
+    /*headerブロック
+    ---------------------------------------------------------------------------*/
+    /*ヘッダー内のメニュー*/
+    header ul {
+      display: none;	/*面積が狭くなるので非表示に。サブコンテンツに同じメニューがあるのが予備です。*/
+    }
+  
+    #menubar.db {
+        display: block;
+    }
+}
+
+@media screen and (min-width:900px) {
+    html, body {
+      font-size: 16px;	/*基準となるフォントサイズの上書き*/
+    }
+
+    /*ハンバーガーメニューを非表示にする*/
+    #menubar.db {display: none;}
+    #menubar_hdr {display: none;}
+}
+  
+
+/*フッター設定
+---------------------------------------------------------------------------*/
+footer small {font-size: 100%;}
+
+footer {
+	font-size: 0.6em;		/*文字サイズ*/
+	background: #222;	/*背景色*/
+	color: #999;			/*文字色*/
+	text-align: center;		/*内容をセンタリング*/
+	padding: 20px;			/*ボックス内の余白*/
+}
+
+/*リンクテキスト*/
+footer a {
+    color: #999;text-decoration: none;
+}
+
+/*フッターメニュー設定
+---------------------------------------------------------------------------*/
+/*ボックス全体の設定*/
+#footermenu {
+	background: #333;	/*背景色*/
+	color: #999;		/*文字色*/
+	font-size: 0.7em;	/*文字サイズ*/
+	display: flex;		/*flexボックスを使う指定*/
+	justify-content: space-between;	/*並びかたの種類の指定*/
+	align-items: flex-start;		/*垂直揃えの指定。上に配置されるように。*/
+	padding: 20px;		/*ボックス内の余白*/
+}
+
+/*ボックス内のリンクテキスト設定*/
+#footermenu a {
+	text-decoration: none;
+	color: #999;	/*文字色*/
+}
+
+/*リンクテキストのマウスオン時*/
+#footermenu a:hover {
+	color: #ccc;	/*文字色*/
+}
+
+/*ulタグ（メニューの列単位）*/
+#footermenu ul {
+	margin: 0;
+	padding: 0 2px;
+	flex: 1;
+	list-style: none;
+}
+
+/*title*/
+#footermenu .title {
+	font-weight: bold;		/*太字にする*/
+	color: #ccc;			/*文字色*/
+	padding-bottom: 5px;	/*下に空けるスペース*/
+}

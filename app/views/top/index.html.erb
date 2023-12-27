@@ -1,0 +1,39 @@
+<div id="container">
+  <main>
+    <section>
+      <h2>みんなの良いモノ</h2>
+      <% if @current_user %>
+        <h3>
+          お気に入りを<%= link_to new_item_path, class: "" do %>投稿<% end %>しよう
+        </h3>   
+      <% else %>
+        <h3>
+          <%= link_to new_user_path, class: "" do %>会員登録<% end %>・<%= link_to login_path, class: "" do %>ログイン<% end %>して投稿しよう
+        </h3>    
+      <% end %>
+      <div class="list-container">
+        <% @items.each do |item| %>
+          <div class="list">
+            <figure>
+              <%= link_to item_path(item.id), class: "" do %>
+                <%= image_tag item.image.url, class:'item-img' %>
+              <% end %>
+            </figure>
+            <div class="text">
+              <div class="name">
+                <%= image_tag item.user.image.url, size: '25x25', class:'' %>
+                <a href="user.html"><%= item.user.name %></a>
+              </div>
+              <p class="item-title">
+                <%= link_to item_path(item.id), class: "" do %>
+                  <%= item.title %>
+                <% end %>
+              </p>
+              <p class="item-detail"><%= item.detail %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </section>
+  </main>
+</div>

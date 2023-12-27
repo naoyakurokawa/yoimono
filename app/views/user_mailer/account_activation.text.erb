@@ -1,0 +1,10 @@
+<%= @user.name %>様
+
+YOIMONOに会員登録いただき、誠にありがとうございます。
+
+現在、仮登録となっております。
+
+下記の【承認URL】をクリックし、本登録の手続きをお願いいたします。
+
+【承認URL】
+<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>
