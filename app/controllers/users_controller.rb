@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: %i[show_mypage edit_mypage update_mypage]
+  before_action :logged_in_user, only: %i[show edit update show_mypage edit_mypage update_mypage]
   def new
     @user = User.new(flash[:user])
   end

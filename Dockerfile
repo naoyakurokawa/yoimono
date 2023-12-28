@@ -6,7 +6,9 @@ RUN apk update
  
 # パッケージをインストールするコマンドを実行
 # M1 Macではnokogiriのビルドにbuild-baseが必要
-RUN apk add g++ make mysql-dev tzdata build-base
+RUN apk add g++ make mysql-dev tzdata build-base nodejs npm -y && \
+    npm uninstall yarn -g && \
+    npm install yarn -g -y
  
 # コンテナを起動した時の作業ディレクトリを/appにする
 WORKDIR /app
