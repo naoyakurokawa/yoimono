@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_27_044717) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_28_021558) do
   create_table "items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.string "title"
@@ -30,6 +30,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_27_044717) do
     t.string "activation_digest"
     t.boolean "activated"
     t.datetime "activated_at"
+    t.string "reset_digest"
+    t.datetime "reset_sent_at"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
