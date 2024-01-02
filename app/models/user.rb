@@ -1,8 +1,24 @@
 class User < ApplicationRecord
+  # relation
+  has_many :items, dependent: :destroy
+  has_many :active_relationships, class_name: "Relationship",
+                                  foreign_key: "follower_id",
+                                  dependent: :destroy
+  has_many :following, through: :active_relationships, source: :followed
+  has_many :passive_relationships, class_name: "Relationship",
+                                   foreign_key: "followed_id",
+                                   dependent: :destroy
+  has_many :followers, through: :passive_relationships, source: :follower
+  ## 以下のようにも書ける
+  ## has_many :followers, through: :passive_relationships
+  # accessor
   attr_accessor :remember_token, :activation_token, :reset_token
+  # 実行メソッド
   before_save   :downcase_email
   before_create :create_activation_digest
+  # 画像関係
   mount_uploader :image, ImageUploader
+  # パスワード設定
   has_secure_password
   # バリデーション
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -68,9 +84,19 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
 
-  def age
-    now = Time.zone.now
-    (now.strftime('%Y%m%d').to_i - birthday.strftime('%Y%m%d').to_i) / 10000
+  # ユーザーをフォローする
+  def follow(other_user)
+    following << other_user
+  end
+
+  # ユーザーをフォロー解除する
+  def unfollow(other_user)
+    active_relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  # 現在のユーザーがフォローしてたらtrueを返す
+  def following?(other_user)
+    following.include?(other_user)
   end
 
   private

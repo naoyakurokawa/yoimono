@@ -1,0 +1,14 @@
+<div class="users-inner">
+  <% search_users.each do |u| %>
+  <div class="user-partial-card">
+    <div class="user-partial-image">
+      <%= image_tag u.image.url, size: '200x200', class:'' %>
+    </div>
+    <div class="user-partial-data">
+      <%= link_to(user_path(u.name), class:"user-partial-link") do %>
+        <%= u.name %>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
+</div>

@@ -22,7 +22,15 @@
             <div class="text">
               <div class="name">
                 <%= image_tag item.user.image.url, size: '25x25', class:'' %>
-                <a href="user.html"><%= item.user.name %></a>
+                <% if @current_user && @current_user.id == item.user.id %>
+                  <%= link_to mypage_path, class: "" do %>
+                    <%= item.user.name %></a>
+                  <% end %>
+                <% else %>
+                  <%= link_to user_path(item.user.name), class: "" do %>
+                    <%= item.user.name %></a>
+                  <% end %>
+                <% end %>
               </div>
               <p class="item-title">
                 <%= link_to item_path(item.id), class: "" do %>
