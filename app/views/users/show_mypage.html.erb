@@ -1,5 +1,8 @@
 <h1>マイページ</h1>
 <%= image_tag @current_user.image.url, size: '300x230', class:'' %>
+<section class="stats">
+    <%= render 'shared/stats' %>
+</section>
 <p><%= @current_user.name %></p>
 <p><%= @current_user.email %></p>
 <p>⚫︎⚫︎⚫︎⚫︎⚫︎⚫︎⚫︎⚫︎</p>

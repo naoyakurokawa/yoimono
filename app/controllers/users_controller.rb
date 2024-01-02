@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: %i[show edit update show_mypage edit_mypage update_mypage]
+  before_action :logged_in_user, only: %i[edit update show_mypage edit_mypage update_mypage]
   def new
     @user = User.new(flash[:user])
   end
@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find_by(name: params[:id])
   end
 
   def edit
@@ -30,6 +31,10 @@ class UsersController < ApplicationController
     else
       render :edit_mypage
     end
+  end
+
+  def show_mypage
+    @user = @current_user
   end
 
   private
