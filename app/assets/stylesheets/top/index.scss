@@ -53,7 +53,6 @@ main p + p {margin-top: -10px;}
   justify-content: space-between;
 }
 
-/*１個あたりのボックス設定*/
 .list {
 	display: flex;				/*flexボックスを使う指定*/
 	flex-direction: column;		/*子要素を縦並びにする*/

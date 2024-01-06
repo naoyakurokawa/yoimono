@@ -1,4 +1,4 @@
-class CreateItems < ActiveRecord::Migration[7.0]
+class CreateItems < ActiveRecord::Migration[6.1]
   def change
     create_table :items do |t|
       t.references :user, null: false, foreign_key: true
