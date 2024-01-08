@@ -1,9 +1,7 @@
-<%= javascript_include_tag webpack_asset_path('test.js') %>
 <div id="container">
   <main>
     <section>
       <h2>みんなの良いモノ</h2>
-      <div data-vue="Test"></div>
       <% if @current_user %>
         <h3>
           お気に入りを<%= link_to new_item_path, class: "" do %>投稿<% end %>しよう

@@ -1,8 +1,12 @@
+<% content_for :head do %>
+  <script src="/assets/relationship.js"></script>
+<% end %>
 <h1>ユーザー</h1>
 <%= image_tag @user.image.url, size: '300x230', class:'' %>
 <section class="stats">
-    <%= render 'shared/stats' %>
+  <%= render 'shared/stats' %>
 </section>
-<%= render 'shared/relationship' %>
+<div id="relationship-button" data-vue='{"followerId": "<%= @current_user.id %>","followedId": "<%= @user.id %>" }'>
+</div>
 <p id="test"></p>
 <p><%= @user.name %></p>

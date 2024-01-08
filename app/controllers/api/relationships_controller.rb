@@ -2,7 +2,8 @@
 
 module Api
   class RelationshipsController < ActionController::API
-    before_action :logged_in_user
+    include SessionsHelper
+    before_action :current_user
 
     def index
       render json: Relationship.filter_by_followed(params[:followed_id]).select(:id, :follower_id, :followed_id)
@@ -10,20 +11,21 @@ module Api
 
     def create
       @user = User.find(params[:followed_id])
-      current_user.active_relationships.create!(relationships_params)
-      @user.create_notification_follow!(current_user)
+      @current_user.follow(@user)
+      # @current_user.active_relationships.create!(relationships_params)
       head :created
     end
 
     def destroy
-      current_user.active_relationships.find(params[:id]).destroy!
+      user = Relationship.find(params[:id]).followed
+      @current_user.unfollow(user)
       head :ok
     end
 
     private
 
     def relationships_params
-      params.require(:relationship).permit(:followed_id)
+      params.require(:relationship).permit(:followed_id, :format)
     end
   end
 end

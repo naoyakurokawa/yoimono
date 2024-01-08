@@ -7,7 +7,7 @@ const path = require('path')
 module.exports = {
   mode: 'development',
   entry: {
-    test: './app/javascripts/test.js'
+    relationship: './app/javascripts/relationship.js'
   },
   output: {
     path: path.resolve(__dirname, './public/assets'),
