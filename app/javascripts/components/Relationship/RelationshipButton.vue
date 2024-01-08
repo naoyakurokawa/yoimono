@@ -1,9 +1,18 @@
 <template>
   <div>
-    <div v-if="isRelationshiped" @click="deleteRelationship()" class="btn btn-bg follow-followed">
+    <div
+      v-if="isRelationshiped"
+      class="btn btn-bg follow-followed"
+      @click="deleteRelationship()"
+    >
       <i class="fas fa-user-minus"></i> フォロー解除
     </div>
-    <div v-else @click="registerRelationship()" class="btn btn-bg" style="margin:0;">
+    <div
+      v-else
+      class="btn btn-bg"
+      style="margin: 0"
+      @click="registerRelationship()"
+    >
       <i class="fas fa-user-plus"></i> フォローする
     </div>
   </div>
@@ -15,48 +24,51 @@ import { csrfToken } from 'rails-ujs'
 axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken()
 
 export default {
-  props: ['followerId', 'followedId'],
+  props: {
+    followerId: {
+      type: Number,
+      default: 0,
+    },
+    followedId: {
+      type: Number,
+      default: 0,
+    },
+  },
   data() {
     return {
       followerIds: [],
-      isRelationshiped: false,
     }
   },
   computed: {
-    // count() {
-    //   return this.relationshipList.length
-    // },
     isRelationshiped() {
       return this.isFollow()
-    }
+    },
   },
   async created() {
     const res = await this.fetchRelationshipByFollowedId()
-    // this.relationshipList = res
-    this.followerIds = res.map(e => e.follower_id)
+    this.followerIds = res.map((e) => e.follower_id)
     this.isRelationshiped = this.isFollow()
   },
   methods: {
     async fetchRelationshipByFollowedId() {
-      const res = await axios.get(`/api/relationships/?followed_id=${this.followedId}`)
-      if (res.status !== 200) { process.exit() }
+      const res = await axios.get(
+        `/api/relationships/?followed_id=${this.followedId}`,
+      )
       return res.data
     },
     async registerRelationship() {
-      const res = await axios.post('/api/relationships', { followed_id: this.followedId })
-      if (res.status !== 201) { process.exit() }
+      await axios.post('/api/relationships', {
+        followed_id: this.followedId,
+      })
       this.followerIds.push(Number(this.followerId))
-      // this.isRelationshiped = this.isFollow()
     },
     async deleteRelationship() {
-      const res = await axios.delete(`/api/relationships/${this.followedId}`)
-      if (res.status !== 200) { process.exit() }
+      await axios.delete(`/api/relationships/${this.followedId}`)
       this.followerIds = this.followerIds.filter((e) => e !== this.followerId)
-      // this.isRelationshiped = this.isFollow()
     },
     isFollow() {
       return this.followerIds.includes(this.followerId)
     },
-  }
+  },
 }
 </script>
