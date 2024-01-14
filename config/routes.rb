@@ -30,6 +30,7 @@ end
 ## 例: get 'exit', to: 'sessions#destroy', as: :logout
 ## 名前付きヘルパーとしてlogout_pathとlogout_urlが作成
 
-# scope:  URL: 指定のパスにしたい	ファイル構成: 変えたくない
-# namespace  URL: 指定のパスにしたい	ファイル構成: 指定のパスにしたい
-# module  URL: 変えたくない	ファイル構成: 指定のパスにしたい
+# 指定方法
+## scope:  URL: 指定のパスにしたい	ファイル構成: 変えたくない
+## namespace  URL: 指定のパスにしたい	ファイル構成: 指定のパスにしたい
+## module  URL: 変えたくない	ファイル構成: 指定のパスにしたい
