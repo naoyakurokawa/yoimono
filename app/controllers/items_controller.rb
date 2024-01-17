@@ -5,14 +5,14 @@ class ItemsController < ApplicationController
   end
 
   def create
-    item = Item.new(item_params)
-    item.user_id = @current_user.id
-    if item.save
-      redirect_to mypage_path
+    @item = Item.new(item_params)
+    @item.user_id = @current_user.id
+    if @item.save
+      flash[:notice] = "モノを登録しました"
+      redirect_to top_index_path
     else
-      flash[:item] = item
-      flash[:error_messages] = item.errors.full_messages
-      redirect_back fallback_location: 'http://localhost'
+      flash[:error_messages] = @item.errors.full_messages
+      render new_item_path
     end
   end
 
@@ -27,15 +27,17 @@ class ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     if @item.update(params)
-      redirect_to item_path
+      flash[:notice] = "モノを登録しました"
+      redirect_to top_index_path
     else
-      render :edit_mypage
+      flash[:error_messages] = @item.errors.full_messages
+      render new_item_path
     end
   end
 
   private
 
   def item_params
-    params.require(:item).permit(:title, :detail, :image, :image_cache)
+    params.require(:item).permit(:title, :detail, :image)
   end
 end

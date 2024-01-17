@@ -8,11 +8,11 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       @user.send_activation_email
-      flash[:info] = "メールアドレス宛に承認メールを送りました。ご確認下さい。"
+      flash[:notice] = "メールアドレス宛に承認メールを送りました。ご確認下さい。"
       redirect_to root_url
     else
-      flash[:info] = 'faild'
-      redirect_to new_user_path
+      flash[:error_messages] = @user.errors.full_messages
+      render new_user_path
     end
   end
 
@@ -29,7 +29,8 @@ class UsersController < ApplicationController
     if @user.update(params)
       redirect_to mypage_path
     else
-      render :edit_mypage
+      flash[:error_messages] = @user.errors.full_messages
+      render edit_user_path
     end
   end
 
