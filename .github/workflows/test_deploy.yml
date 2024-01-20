@@ -13,7 +13,7 @@ jobs:
           ruby-version: 2.6.8
 
       - uses: actions/setup-node@v2
-         with:
+        with:
           node-version: 16
 
       - name: Run bundle install
