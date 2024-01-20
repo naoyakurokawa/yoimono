@@ -1,148 +1,66 @@
 @charset "utf-8";
 
-
-/*containerブロック（左右のブロックを囲むボックス）
----------------------------------------------------------------------------*/
-#container {
-	margin: 5% 2%;		/*上下、左右に空ける余白*/
-}
-
-
-/*mainブロック設定
----------------------------------------------------------------------------*/
-main {
-  margin: 0 auto 64px;
-}
-
-/*mainブロック内のh2タグ*/
-main h2 {
-	margin: 0;
-	margin: 0 0 5px;		/*上、左右、下に空けるスペース*/
-	letter-spacing: 0.1em;	/*文字間隔を少しだけ広くとる設定*/
-	text-align: center;		/*中身をセンタリング*/
-	font-size: 2.2em;		/*文字サイズ。親要素の2.2倍に。*/
-}
-
-main h3 {
-	display: block;
-	font-size: 1.5em;	/*文字サイズ。親要素の0.5倍（半分）に。*/
-	color: #666;
+.items h2 {
 	text-align: center;
-	margin-bottom: 20px;
 }
 
-/*mainブロックのpタグ*/
-main p {
-	margin: 0 20px 30px;	/*上、左右、下へ空けるスペース*/
+.items h3 {
+	margin-top: 10px;
+	text-align: center;
 }
 
-main p + p {margin-top: -10px;}
-
-/*h2見出し*/
-#check h2 {
-	text-align: center;	/*テキストをセンタリング*/
+.items ul {
+	list-style: none;
+	margin-top: 10px;
+	padding: 0;
+	display: flex;
+	gap: 32px;
+	flex-wrap: wrap;
 }
 
-
-/*listブロック
----------------------------------------------------------------------------*/
-/*listブロック全体を囲むブロック*/
-.list-container {
-	display: flex;		/*flexボックスを使う指定*/
-	flex-wrap: wrap;	/*折り返す指定*/
-  justify-content: space-between;
+.items li {
+	width: calc((100% - 64px) / 3);
+	box-sizing: border-box;
+	padding: 14px;
 }
 
-.list {
-	display: flex;				/*flexボックスを使う指定*/
-	flex-direction: column;		/*子要素を縦並びにする*/
-	justify-content: space-between;	/*並びかたの種類の指定*/
-	margin-bottom: 30px;	/*ボックス同士の上下間に空けるスペース*/
-	padding: 10px;			/*ボックス内の余白*/
-	background: #fff;		/*背景色*/
-	width: 46%;				/*幅*/
-	margin-right: 4%;		/*右側に空けるスペース*/
-	border: 1px solid #999;	/*枠線の幅、線種、色*/
-	border-radius: 10px;	/*角丸のサイズ*/
-	overflow: hidden;		/*飛び出る要素があれば非表示にする*/
-	position: relative;		/*子要素でabsolute(絶対配置)を使うための指定*/
+.item-info {
+	display: flex;
 }
 
-/*ボックス内のtextブロック*/
-.list .text {
-	margin: 10px;
+.items .user-img {
+	width: 16%;
+	height: auto;
+	vertical-align: middle;
+	border-radius: 50%;
+	float: left;
+}
+
+.text {
+	margin-left: 10px;
+	width: calc(100% - 16% - 10px);
 }
 
 .item-title {
-	margin: 0;
-	font-size:  1.8em;	/*文字サイズを80%に*/
-	line-height: 1.5;	/*行間を少し狭くする*/
+	margin-top: 8px;
+	font-weight: bold;
+	display: flow-root;
 }
 
 .item-detail {
-	margin: 0;
-	font-size:  1.0em;	/*文字サイズを80%に*/
-	line-height: 1.5;	/*行間を少し狭くする*/
+	margin-top: 4px;
+	display: flow-root;
 }
-
 
 .item-img {
-	height: 200px;
+	margin-top: 16px;
+	text-align: center;
 }
 
-/*名前*/
-.user-img {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+@media (max-width: 600px) {
+	.items li {
+		width: 100%;
+		box-sizing: border-box;
+		padding: 14px;
+	}
 }
-
-.name {
-  margin: 0.5em 0 0;
-}
-
-/*マウスオン時*/
-.list .icon a:hover {
-	opacity: 1;	/*デフォルトで半透明になるのを、しないように*/
-	filter: brightness(1.2);	/*明るくする*/
-}
-
-/*PAGE TOP（↑）設定
----------------------------------------------------------------------------*/
-.pagetop-show {display: block;}
-
-/*ボタンの設定*/
-.pagetop a {
-	display: block;text-decoration: none;text-align: center;z-index: 99;
-	background: rgba(0,0,0,0.2);	/*背景色。0,0,0は黒の事で0.2は色が20%出た状態。*/
-	position: fixed;	/*スクロールに追従しない(固定で表示)為の設定*/
-	right: 20px;		/*右からの配置場所指定*/
-	bottom: 20px;		/*下からの配置場所指定*/
-	color: #fff;		/*文字色*/
-	font-size: 1.5em;	/*文字サイズ*/
-	width: 60px;		/*幅*/
-	line-height: 60px;	/*高さ*/
-	border-radius: 50%;	/*円形にする*/
-}
-
-
-/*---------------------------------------------------------------------------
-ここから下は画面幅900px以上の追加指定
----------------------------------------------------------------------------*/
-@media screen and (min-width:900px) {
-  /*mainブロック設定
-  ---------------------------------------------------------------------------*/
-  /*mainブロックの設定*/
-  main {	
-    order: 2;	/*mainと#menubarの左右の配置指定。数字が小さい方が先(左)にきます。*/
-  }
-
-  /*listブロック
-  ---------------------------------------------------------------------------*/
-  /*１個あたりのボックス設定*/
-  .list {
-    width: 30%;				/*幅*/
-    margin-right: 1.33%;	/*右側に空けるスペース*/
-  }
-}
-

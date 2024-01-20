@@ -1,37 +1,31 @@
-<div id="container">
-  <main>
-    <section>
-      <h2>みんなの良いモノ</h2>
-      <% if @current_user %>
-        <h3>
-          お気に入りを<%= link_to new_item_path, class: "" do %>投稿<% end %>しよう
-        </h3>   
-      <% else %>
-        <h3>
-          <%= link_to new_user_path, class: "" do %>会員登録<% end %>・<%= link_to login_path, class: "" do %>ログイン<% end %>して投稿しよう
-        </h3>    
-      <% end %>
-      <div class="list-container">
-        <% @items.each do |item| %>
-          <div class="list">
-            <figure>
-              <%= link_to item_path(item.id), class: "" do %>
-                <%= image_tag item.image.url, class:'item-img' %>
-              <% end %>
-            </figure>
+  <section class="items">
+    <h2>みんなの良いモノ</h2>
+    <% if @current_user %>
+      <h3>
+        お気に入りを<%= link_to new_item_path, class: "" do %>投稿<% end %>しよう
+      </h3>   
+    <% else %>
+      <h3>
+        <%= link_to new_user_path, class: "" do %>会員登録<% end %>・<%= link_to login_path, class: "" do %>ログイン<% end %>して投稿しよう
+      </h3>    
+    <% end %>
+    <ul>
+      <% @items.each do |item| %>
+        <li>
+          <div class="item-info">
+            <div class="user-img">
+              <%= image_tag item.user.image.url %>
+            </div>
             <div class="text">
-              <div class="name">
-                <%= image_tag item.user.image.url, size: '25x25', class:'' %>
-                <% if @current_user && @current_user.id == item.user.id %>
-                  <%= link_to mypage_path, class: "" do %>
-                    <%= item.user.name %></a>
-                  <% end %>
-                <% else %>
-                  <%= link_to user_path(item.user.name), class: "" do %>
-                    <%= item.user.name %></a>
-                  <% end %>
+              <% if @current_user && @current_user.id == item.user.id %>
+                <%= link_to mypage_path, class: "" do %>
+                  <%= item.user.name %></a>
                 <% end %>
-              </div>
+              <% else %>
+                <%= link_to user_path(item.user.name), class: "" do %>
+                  <%= item.user.name %></a>
+                <% end %>
+              <% end %>
               <p class="item-title">
                 <%= link_to item_path(item.id), class: "" do %>
                   <%= item.title %>
@@ -40,8 +34,12 @@
               <p class="item-detail"><%= item.detail %></p>
             </div>
           </div>
-        <% end %>
-      </div>
-    </section>
-  </main>
-</div>
+          <div class="item-img">
+            <%= link_to item_path(item.id) do %>
+              <%= image_tag item.image.url %>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </section>

@@ -6,7 +6,8 @@
 <section class="stats">
   <%= render 'shared/stats' %>
 </section>
-<div id="relationship-button" data-vue='{"followerId": "<%= @current_user.id %>","followedId": "<%= @user.id %>" }'>
-</div>
-<p id="test"></p>
+<% if @current_user %>
+  <div id="relationship-button" data-vue='{"followerId": "<%= @current_user.id %>","followedId": "<%= @user.id %>" }'>
+  </div>
+<% end %>
 <p><%= @user.name %></p>

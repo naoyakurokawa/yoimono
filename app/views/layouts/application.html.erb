@@ -6,15 +6,19 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <script src="https://cdn.jsdelivr.net/npm/@rails/ujs@7.1.1/app/assets/javascripts/rails-ujs.min.js"></script>
+    <script src="/assets/menu.js"></script>
     <%= yield :head %>
   </head>
 
   <body>
     <%= render 'layouts/header' %>
-    <%= render 'shared/messages' %>
-    <%= yield %>
+    <div class="container">
+      <%= render 'shared/messages' %>
+      <%= yield %>
+    </div>
     <%= render 'layouts/footer' %>
   </body>
 </html>
